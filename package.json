@@ -13,18 +13,25 @@
     "license": "ISC",
     "devDependencies": {
         "@types/express": "^4.17.21",
+        "@types/jest": "^29.5.13",
         "@types/node": "^22.5.5",
+        "@types/supertest": "^6.0.2",
         "express": "^4.21.0",
         "jest": "^29.7.0",
         "sqlite": "^5.1.1",
         "sqlite3": "^5.1.7",
+        "ts-jest": "^29.2.5",
         "ts-node": "^10.9.2",
         "typescript": "^5.6.2"
     },
     "jest": {
+        "preset": "ts-jest",
         "testEnvironment": "node",
         "coveragePathIgnorePatterns": [
             "/node_modules/"
         ]
+    },
+    "dependencies": {
+        "supertest": "^7.0.0"
     }
 }
