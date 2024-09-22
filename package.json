@@ -1,0 +1,30 @@
+{
+    "name": "senecabackendtask",
+    "version": "1.0.0",
+    "description": "backend take home task for seneca",
+    "main": "index.js",
+    "scripts": {
+        "dev": "ts-node index.ts",
+        "build": "tsc",
+        "serve": "node dist/index.js",
+        "test": "jest"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/express": "^4.17.21",
+        "@types/node": "^22.5.5",
+        "express": "^4.21.0",
+        "jest": "^29.7.0",
+        "sqlite": "^5.1.1",
+        "sqlite3": "^5.1.7",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.6.2"
+    },
+    "jest": {
+        "testEnvironment": "node",
+        "coveragePathIgnorePatterns": [
+            "/node_modules/"
+        ]
+    }
+}
