@@ -47,7 +47,7 @@ Fetches study session data.
 | `sessionId`   | Path   | string | Identifies the study session (UUID)        |
 
 
-## How to Run the Start Service Locally
+## How to Run the Stat Service Locally
 ### 1. Install Dependencies
 
 Navigate to the root directory and install dependencies:
