@@ -13,18 +13,6 @@ describe('GET /courses/:courseId', () => {
   beforeAll(async () => {
     const db = await getDatabase();
 
-    await db.exec(`
-      CREATE TABLE IF NOT EXISTS CourseStats (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        userId TEXT NOT NULL,
-        courseId TEXT NOT NULL,
-        sessionId TEXT NOT NULL,
-        totalModulesStudied INTEGER NOT NULL,
-        averageScore REAL NOT NULL,
-        timeStudied INTEGER NOT NULL
-      );
-    `);
-
     for (let i = 0; i < sessionId.length; i++) {
       await db.run(`
         INSERT INTO CourseStats (userId, courseId, sessionId, totalModulesStudied, averageScore, timeStudied) 

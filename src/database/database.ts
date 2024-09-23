@@ -18,5 +18,17 @@ export async function getDatabase() {
     driver: sqlite3.Database,
   });
 
+  await db.exec(`
+    CREATE TABLE IF NOT EXISTS CourseStats (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      userId TEXT NOT NULL,
+      courseId TEXT NOT NULL,
+      sessionId TEXT NOT NULL,
+      totalModulesStudied INTEGER NOT NULL,
+      averageScore REAL NOT NULL,
+      timeStudied INTEGER NOT NULL
+    );
+  `);
+
   return db;
 }
