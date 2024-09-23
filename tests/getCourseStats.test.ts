@@ -10,10 +10,6 @@ describe('GET /courses/:courseId', () => {
   const averageScore: number[] = [7.5, 8.0, 9.0];
   const timeStudied: number[] = [2, 3, 6];
 
-  const expectedTotalModulesStudied = totalModulesStudied.reduce((sum, value) => sum + value, 0);
-  const expectedAverageScore = averageScore.reduce((sum, value) => sum + value, 0) / averageScore.length;
-  const expectedTimeStudied = timeStudied.reduce((sum, value) => sum + value, 0);
-
   beforeAll(async () => {
     const db = await getDatabase();
 
@@ -38,14 +34,19 @@ describe('GET /courses/:courseId', () => {
   })
 
   it('should return 200 if course stats are found', async () => {
+
+    const expectedModulesStudied = totalModulesStudied.reduce((sum, value) => sum + value, 0);
+    const expectedScore = averageScore.reduce((sum, value) => sum + value, 0) / averageScore.length;
+    const expectedTimeStudied = timeStudied.reduce((sum, value) => sum + value, 0);
+
     const response = await request(testApp)
-      .get('/courses/1')
-      .set('X-User-Id', 'user-123');
+      .get(`/courses/${courseId}`)
+      .set('X-User-Id', userId);
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
-      totalModulesStudied: expectedTotalModulesStudied,
-      averageScore: expectedAverageScore,
+      totalModulesStudied: expectedModulesStudied,
+      averageScore: expectedScore,
       timeStudied: expectedTimeStudied,
     });
   });

@@ -14,9 +14,9 @@ async function selectCourseStats({
 
     const result = await db.get(
       `SELECT 
-                COUNT(totalModulesStudied) AS modulesCompleted,
+                SUM(totalModulesStudied) AS totalModulesStudied,
                 AVG(averageScore) AS averageScore,
-                SUM(timeStudied) AS totalTimeStudied
+                SUM(timeStudied) AS timeStudied
             FROM CourseStats 
             WHERE userId = ? AND courseId = ?;`,
       [userId, courseId]
