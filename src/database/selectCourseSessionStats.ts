@@ -15,7 +15,7 @@ async function selectCourseSessionStats({
     const db = await getDatabase();
 
     const result = await db.get(
-      `SELECT * FROM CourseStats 
+      `SELECT sessionId, totalModulesStudied, averageScore, timeStudied FROM CourseStats 
              WHERE userId = ? AND courseId = ? AND sessionId = ?`,
       [userId, courseId, sessionId]
     );

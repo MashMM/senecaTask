@@ -3,9 +3,9 @@ import testApp from './testApp';
 import { getDatabase } from '../src/database/database';
 
 describe('GET /courses/:courseId', () => {
-  const userId: string = "Matt";
-  const courseId: string = 'Maths';
-  const sessionId: string[] = ['Addition', 'Subtraction', 'Multiplication'];
+  const userId: string = "Mashhood";
+  const courseId: string = 'Chemistry';
+  const sessionId: string[] = ['Atoms', 'Acids', 'Titrations'];
   const totalModulesStudied: number[] = [3, 8, 4];
   const averageScore: number[] = [7.5, 8.0, 9.0];
   const timeStudied: number[] = [2, 3, 6];
@@ -42,7 +42,7 @@ describe('GET /courses/:courseId', () => {
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
       sessionId: sessionId[0],
-      totalModulesStudied: totalModulesStudied,
+      totalModulesStudied: totalModulesStudied[0],
       averageScore: averageScore[0],
       timeStudied: timeStudied[0],
     });
