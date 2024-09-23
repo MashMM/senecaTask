@@ -13,7 +13,7 @@ async function selectCourseSessionStats({
 }: GetCourseSessionStatsProps) {
   try {
     const db = await getDatabase();
-
+    // Query to get users stats for a particular session in a course
     const result = await db.get(
       `SELECT sessionId, totalModulesStudied, averageScore, timeStudied FROM CourseStats 
              WHERE userId = ? AND courseId = ? AND sessionId = ?`,

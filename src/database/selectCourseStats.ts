@@ -11,7 +11,7 @@ async function selectCourseStats({
 }: GetCourseStatsProps) {
   try {
     const db = await getDatabase();
-
+    // Query to aggregate course results
     const result = await db.get(
       `SELECT 
                 SUM(totalModulesStudied) AS totalModulesStudied,

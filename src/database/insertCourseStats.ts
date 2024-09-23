@@ -20,7 +20,7 @@ async function insertCourseStats({
   try {
     const db = await getDatabase();
 
-    const result = await db.run(
+    await db.run(
       `INSERT INTO CourseStats (userId, courseId, sessionId, totalModulesStudied, averageScore, timeStudied) 
          VALUES (?, ?, ?, ?, ?, ?)`,
       [userId, courseId, sessionId, totalModulesStudied, averageScore, timeStudied]

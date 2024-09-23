@@ -1,38 +1,26 @@
 import request from 'supertest';
 import testApp from './testApp';
 import { getDatabase } from '../src/database/database';
+import insertMockData, { mockData } from './mockData/insertMockData';
+import clearCourseStats from './mockData/clearMockData';
 
 describe('GET /courses/:courseId', () => {
-  const userId: string = "Mashhood";
-  const courseId: string = 'Chemistry';
-  const sessionId: string[] = ['Atoms', 'Acids', 'Titrations'];
-  const totalModulesStudied: number[] = [3, 8, 4];
-  const averageScore: number[] = [7.5, 8.0, 9.0];
-  const timeStudied: number[] = [2, 3, 6];
 
   beforeAll(async () => {
-    const db = await getDatabase();
-
-    for (let i = 0; i < sessionId.length; i++) {
-      await db.run(`
-        INSERT INTO CourseStats (userId, courseId, sessionId, totalModulesStudied, averageScore, timeStudied) 
-        VALUES (?, ?, ?, ?, ?, ?)
-      `, [userId, courseId, sessionId[i], totalModulesStudied[i], averageScore[i], timeStudied[i]]);
-    }
+    await insertMockData();
   })
 
   it('should return 200 if session stats are found', async () => {
-
     const response = await request(testApp)
-      .get(`/courses/${courseId}/sessions/${sessionId[0]}`)
-      .set('X-User-Id', userId);
+      .get(`/courses/${mockData.courseId}/sessions/${mockData.sessionId[0]}`)
+      .set('X-User-Id', mockData.userId);
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
-      sessionId: sessionId[0],
-      totalModulesStudied: totalModulesStudied[0],
-      averageScore: averageScore[0],
-      timeStudied: timeStudied[0],
+      sessionId: mockData.sessionId[0],
+      totalModulesStudied: mockData.totalModulesStudied[0],
+      averageScore: mockData.averageScore[0],
+      timeStudied: mockData.timeStudied[0],
     });
   });
 
@@ -60,9 +48,7 @@ describe('GET /courses/:courseId', () => {
   });
 
   afterAll(async () => {
-    const db = await getDatabase();
-    await db.run(`DELETE FROM CourseStats`);
-    await db.close();
+    clearCourseStats();
   });
 
 })

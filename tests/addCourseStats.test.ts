@@ -3,7 +3,7 @@ import testApp from './testApp';
 
 describe('POST /courses/:courseId', () => {
 
-  it('should return 200 if all required fields are present and the correct type', async () => {
+  it('should return 201 if all required fields are present and the correct type', async () => {
     const response = await request(testApp)
       .post(`/courses/1`)
       .set('X-User-Id', 'user-123')

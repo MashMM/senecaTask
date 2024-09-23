@@ -6,10 +6,7 @@ const getCourseSessionStats = async (req: Request, res: Response) => {
   const { courseId, sessionId } = req.params;
   const userId = req.header('X-User-Id');
 
-  if (!courseId) return res.status(400).send({ message: 'courseId required' });
   if (!userId) return res.status(400).send({ message: 'userId required' });
-  if (!sessionId) return res.status(400).send({ message: 'sessionId required' });
-
 
   if (typeof userId !== 'string') return res.status(400).send({ message: 'invalid userId' });
 

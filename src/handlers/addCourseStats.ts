@@ -12,10 +12,6 @@ const addCourseStats = async (req: Request, res: Response) => {
     timeStudied,
   } = req.body ?? {};
 
-  if (!courseId) {
-    return res.status(400).send({ message: 'courseId required' });
-  }
-
   if (!userId) return res.status(400).send({ message: 'userId required' });
   if (typeof userId !== 'string') return res.status(400).send({ message: 'invalid userId' });
 
