@@ -14,7 +14,7 @@ These endpoints allow you to use the stats service.
 Stores study session event data, or updates it if study session already exists.
 #### Request:
 
-| Request Parameters     | In     | Type   | Description                                 |
+| Request     | In     | Type   | Description                                 |
 |---------------|--------|--------|---------------------------------------------|
 | `X-User-Id`   | Header | string | Identifies the user (UUID)                 |
 | `courseId`    | Path   | string | Identifies the course (UUID)               |
