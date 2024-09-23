@@ -18,7 +18,7 @@ Stores study session event data, or updates it if study session already exists.
 | `sessionId`                 | string | Unique identifier for the session           |
 | `totalModulesStudied`       | number | Total number of modules studied             |
 | `averageScore`              | number | Average score achieved during the session   |
-| `timeStudied`               | number | Total time spent studying (in milliseconds) |
+| `timeStudied`               | number | Total time spent studying  |
 
 ### GET /courses/{courseId}
 Fetches aggregated course data.
@@ -27,7 +27,7 @@ Fetches aggregated course data.
 |-----------------------------|--------|---------------------------------------------|
 | `totalModulesStudied`       | number | Total number of modules studied in the course |
 | `averageScore`              | number | User's average score across the course     |
-| `timeStudied`               | number | Total time spent studying the course (in milliseconds) |
+| `timeStudied`               | number | Total time spent studying the course  |
 
 ### GET /courses/{courseId}/sessions/{sessionId}
 Fetches study session data.
@@ -37,7 +37,7 @@ Fetches study session data.
 | `sessionId`                 | string | Unique identifier for the session           |
 | `totalModulesStudied`       | number | Total number of modules studied in the session |
 | `averageScore`              | number | User's average score for the session       |
-| `timeStudied`               | number | Total time spent studying the session (in milliseconds) |
+| `timeStudied`               | number | Total time spent studying the session |
 
 
 
