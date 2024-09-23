@@ -99,4 +99,14 @@ describe('POST /courses/:courseId', () => {
     expect(response.status).toBe(400);
     expect(response.body).toEqual({ message: 'invalid timeStudied' });
   });
+
+  it('should return 400 if timeStudied is a negative number', async () => {
+    const response = await request(testApp)
+      .post(`/courses/1`)
+      .set('X-User-Id', 'user-123')
+      .send({ sessionId: 'session-id', totalModulesStudied: 5, averageScore: 80, timeStudied: -1 });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({ message: 'invalid timeStudied' });
+  });
 });

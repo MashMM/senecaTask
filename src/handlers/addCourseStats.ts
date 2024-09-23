@@ -23,13 +23,13 @@ const addCourseStats = async (req: Request, res: Response) => {
   if (typeof sessionId !== 'string') return res.status(400).send({ message: 'invalid sessionId' });
 
   if (!totalModulesStudied) return res.status(400).send({ message: 'totalModulesStudied required' });
-  if (typeof totalModulesStudied !== 'number') return res.status(400).send({ message: 'invalid totalModulesStudied' });
+  if (typeof totalModulesStudied !== 'number' || totalModulesStudied < 0) return res.status(400).send({ message: 'invalid totalModulesStudied' });
 
   if (!averageScore) return res.status(400).send({ message: 'averageScore required' });
   if (typeof averageScore !== 'number') return res.status(400).send({ message: 'invalid averageScore' });
 
   if (!timeStudied) return res.status(400).send({ message: 'timeStudied required' });
-  if (typeof timeStudied !== 'number') return res.status(400).send({ message: 'invalid totalModulesStudied' });
+  if (typeof timeStudied !== 'number' || timeStudied < 0) return res.status(400).send({ message: 'invalid timeStudied' });
 
   const result = await insertCourseStats({
     userId,
