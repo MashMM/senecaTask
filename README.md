@@ -12,33 +12,39 @@ These endpoints allow you to use the stats service.
 
 ### POST /courses/{courseId}
 Stores study session event data, or updates it if study session already exists.
+#### Request:
 
-| Field                       | Type   | Description                                 |
-|-----------------------------|--------|---------------------------------------------|
-| `sessionId`                 | string | Unique identifier for the session           |
-| `totalModulesStudied`       | number | Total number of modules studied             |
-| `averageScore`              | number | Average score achieved during the session   |
-| `timeStudied`               | number | Total time spent studying  |
+| Request Parameters     | In     | Type   | Description                                 |
+|---------------|--------|--------|---------------------------------------------|
+| `X-User-Id`   | Header | string | Identifies the user (UUID)                 |
+| `courseId`    | Path   | string | Identifies the course (UUID)               |
+| `sessionId`   | Body   | string | Unique identifier for the session (UUID)   |
+| `totalModulesStudied`       | Body   | number | Total number of modules studied             |
+| `averageScore`              | Body   | number | Average score achieved during the session   |
+| `timeStudied`               | Body   | number | Total time spent studying  |
+
 
 ### GET /courses/{courseId}
 Fetches aggregated course data.
 
-| Field                       | Type   | Description                                 |
-|-----------------------------|--------|---------------------------------------------|
-| `totalModulesStudied`       | number | Total number of modules studied in the course |
-| `averageScore`              | number | User's average score across the course     |
-| `timeStudied`               | number | Total time spent studying the course  |
+#### Request:
+
+| Parameters     | In     | Type   | Description                                 |
+|---------------|--------|--------|---------------------------------------------|
+| `X-User-Id`   | Header | string | Identifies the user (UUID)                 |
+| `courseId`    | Path   | string | Identifies the course (UUID)               |
+| `sessionId`   | Path   | string | Identifies the study session (UUID)        |
+
 
 ### GET /courses/{courseId}/sessions/{sessionId}
 Fetches study session data.
+#### Request:
 
-| Field                       | Type   | Description                                 |
-|-----------------------------|--------|---------------------------------------------|
-| `sessionId`                 | string | Unique identifier for the session           |
-| `totalModulesStudied`       | number | Total number of modules studied in the session |
-| `averageScore`              | number | User's average score for the session       |
-| `timeStudied`               | number | Total time spent studying the session |
-
+| Parameter     | In     | Type   | Description                                 |
+|---------------|--------|--------|---------------------------------------------|
+| `X-User-Id`   | Header | string | Identifies the user (UUID)                 |
+| `courseId`    | Path   | string | Identifies the course (UUID)               |
+| `sessionId`   | Path   | string | Identifies the study session (UUID)        |
 
 
 ## How to Run the Start Service Locally
