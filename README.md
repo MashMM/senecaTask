@@ -86,12 +86,12 @@ npm install
 npm run build
 ```
 
-### 2. Run the Stat Service
+### 2. Run the Stats Service
 
 ```bash
 npm run serve
 ```
-The Stat Service will be accessible at `http://localhost`.
+The Stat Service will be accessible at `http://localhost/` (port 80).
 
 ### Optional: Run the Jest Test Cases
 
