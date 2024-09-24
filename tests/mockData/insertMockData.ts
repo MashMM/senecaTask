@@ -1,4 +1,4 @@
-import { getDatabase } from "../src/database/database";
+import { getDatabase } from '../../src/database/database';
 
 export const mockData = {
   userId: "Alice",
