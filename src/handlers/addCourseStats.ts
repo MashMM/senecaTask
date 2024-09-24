@@ -36,7 +36,7 @@ const addCourseStats = async (req: Request, res: Response) => {
     timeStudied
   });
 
-  if (result.ok) {
+  if (result) {
     res.status(201).send({ message: 'OK' });
   } else {
     res.status(500).send({ message: 'internal server error' });

@@ -11,7 +11,7 @@ async function selectCourseStats({
 }: GetCourseStatsProps) {
   try {
     const db = await getDatabase();
-    // Query to aggregate course results
+
     const result = await db.get(
       `SELECT 
                 SUM(totalModulesStudied) AS totalModulesStudied,
@@ -21,10 +21,15 @@ async function selectCourseStats({
             WHERE userId = ? AND courseId = ?;`,
       [userId, courseId]
     );
-    return result ?? { data: null };
+
+    if (!result || result.totalModulesStudied === null || result.averageScore === null || result.timeStudied === null) {
+      return undefined;
+    }
+    return result;
+
   } catch (error) {
     console.error('error occured while getting course stats from database:', error);
-    return []
+    throw error;
   }
 }
 

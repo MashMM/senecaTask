@@ -1,6 +1,5 @@
 import request from 'supertest';
 import testApp from './testApp';
-import { getDatabase } from '../src/database/database';
 import insertMockData, { mockData } from './mockData/insertMockData';
 import clearCourseStats from './mockData/clearMockData';
 

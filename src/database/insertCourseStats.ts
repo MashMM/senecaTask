@@ -21,17 +21,16 @@ async function insertCourseStats({
   try {
     const db = await getDatabase();
 
-    // Check if user already has a session under the course
     const existingStats = await selectCourseSessionStats({ userId, courseId, sessionId });
 
-    if (existingStats.data !== null) {
+    if (existingStats) {
       await db.run(
         `UPDATE CourseStats 
          SET totalModulesStudied = ?, averageScore = ?, timeStudied = ? 
          WHERE userId = ? AND courseId = ? AND sessionId = ?`,
         [totalModulesStudied, averageScore, timeStudied, userId, courseId, sessionId]
       );
-      return { ok: true, action: 'updated' };
+      return { ok: true };
     }
 
     await db.run(
@@ -39,11 +38,11 @@ async function insertCourseStats({
          VALUES (?, ?, ?, ?, ?, ?)`,
       [userId, courseId, sessionId, totalModulesStudied, averageScore, timeStudied]
     );
-
     return { ok: true }
+
   } catch (error) {
     console.error('error occured while inserting into database:', error);
-    return { ok: false }
+    throw error;
   }
 }
 

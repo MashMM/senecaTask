@@ -1,12 +1,8 @@
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
-import dotenv from 'dotenv';
 
 export async function getDatabase() {
 
-  dotenv.config();
-
-  // Determine whether to use test database
   const dbUrl = process.env.NODE_ENV === 'test'
     ? './tests/testDatabase'
     : './database';
@@ -20,7 +16,6 @@ export async function getDatabase() {
     driver: sqlite3.Database,
   });
 
-  // Create table if it doesn't exist
   await db.exec(`
     CREATE TABLE IF NOT EXISTS CourseStats (
       id INTEGER PRIMARY KEY AUTOINCREMENT,

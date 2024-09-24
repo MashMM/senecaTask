@@ -1,6 +1,13 @@
 import { Request, Response } from 'express';
 import selectCourseSessionStats from '../database/selectCourseSessionStats';
 
+type CourseSessionStatsResponse = {
+  sessionId: string;
+  totalModulesStudied: Number;
+  averageScore: Number;
+  timeStudied: Number;
+}
+
 const getCourseSessionStats = async (req: Request, res: Response) => {
 
   const { courseId, sessionId } = req.params;
@@ -16,7 +23,17 @@ const getCourseSessionStats = async (req: Request, res: Response) => {
     sessionId
   });
 
-  res.status(200).send(result);
+  if (result) {
+    const courseSessionStatsResponse: CourseSessionStatsResponse = {
+      sessionId: result.sessionId,
+      totalModulesStudied: result.totalModulesStudied,
+      averageScore: result.averageScore,
+      timeStudied: result.timeStudied
+    }
+    res.status(200).send(courseSessionStatsResponse);
+    return;
+  }
+  res.status(404).send({ message: 'no stats found' });
 }
 
 export default getCourseSessionStats;
