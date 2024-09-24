@@ -117,7 +117,7 @@ docker pull mashmm/seneca-task:latest
 ### 3. Run the Docker Image
 
 ```bash
-docker run -p 80:3000 mashmm/seneca-task:latest
+docker run -p 80:80 mashmm/seneca-task:latest
 ```
 The Stat Service will be accessible at `http://<EC2-public-ip>`. Ensure that inbound connections are permitted on port 80 in your security group settings.
 
