@@ -2,6 +2,7 @@
 This readme file contains Assumptions, API Documentation, Installation Guide and a Deployment Guide.
 ## Assumptions
 - If a record exists for the specified userId, courseId, and sessionId, the service should update the existing stats; otherwise, it will create a new record.
+- If there are no stats found, 404 is to be returned.
 
 ## API Endpoints
 These endpoints allow you to use the stats service.
@@ -23,6 +24,10 @@ Stores study session event data, or updates it if study session already exists.
 | `averageScore`              | Body   | number | Average score achieved during the session   |
 | `timeStudied`               | Body   | number | Total time spent studying  |
 
+```yaml
+Response = 
+{ message: 'OK' }
+```
 
 ### GET /courses/{courseId}
 Fetches aggregated course data.
@@ -35,6 +40,15 @@ Fetches aggregated course data.
 | `courseId`    | Path   | string | Identifies the course (UUID)               |
 | `sessionId`   | Path   | string | Identifies the study session (UUID)        |
 
+```yaml
+Reponse =
+{
+  totalModulesStudied: number;
+  averageScore: number;
+  timeStudied: number;
+}
+```
+
 
 ### GET /courses/{courseId}/sessions/{sessionId}
 Fetches study session data.
@@ -45,6 +59,16 @@ Fetches study session data.
 | `X-User-Id`   | Header | string | Identifies the user (UUID)                 |
 | `courseId`    | Path   | string | Identifies the course (UUID)               |
 | `sessionId`   | Path   | string | Identifies the study session (UUID)        |
+
+```yaml
+Response = 
+{
+  sessionId: string;
+  totalModulesStudied: Number;
+  averageScore: Number;
+  timeStudied: Number;
+}
+```
 
 
 ## How to Run the Stat Service Locally
@@ -90,3 +114,10 @@ docker pull mashmm/seneca-task:latest
 docker run -p 80:3000 mashmm/seneca-task:latest
 ```
 The Stat Service will be accessible at `http://<EC2-public-ip>`. Ensure that inbound connections are permitted on port 80 in your security group settings.
+
+### Creating your own image
+
+```bash
+docker build -t your-image-name .
+```
+By creating your own image, you can use it for deployments throug AWS ECR.
