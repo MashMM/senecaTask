@@ -1,5 +1,14 @@
 # Seneca Task
-This readme file contains Assumptions, API Documentation, Installation Guide and a Deployment Guide.
+
+## Table of Contents
+
+- [Assumptions](#assumptions)
+- [API Endpoints](#api-endpoints)
+- [Local Deployment](#how-to-run-the-stats-service-locally)
+- [AWS Deployment](#how-to-build-your-own-docker-image-and-deploy-on-an-ec2-instance-using-amazon-ecr)
+
+
+
 ## Assumptions
 - If a record exists for the specified userId, courseId, and sessionId, the service should update the existing stats; otherwise, it will create a new record.
 - If there are no stats found, 404 is to be returned.
