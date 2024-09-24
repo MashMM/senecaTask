@@ -96,7 +96,7 @@ npm test
 ## How to Deploy the Stats Service on an EC2 Instance
 
 ### Example of deployment:
-[http://13.60.232.213:3000/](http://13.60.232.213:3000/)
+[Click here to view my deployment on an EC2 Instance](http://13.60.232.213/)
 
 ###  1. Ensure Docker is Installed
 
