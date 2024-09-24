@@ -1,4 +1,4 @@
-import express, { Response } from 'express';
+import express, { Request, Response } from 'express';
 import routes from './src/routes/routes';
 
 const app = express();
@@ -7,7 +7,7 @@ const port = process.env.PORT || 80;
 app.use(express.json());
 app.use('/', routes)
 
-app.get('/', async (res: Response) => {
+app.get('/', async (req: Request, res: Response) => {
   res.send('Seneca stats service');
 });
 
