@@ -71,7 +71,7 @@ Response =
 ```
 
 
-## How to Run the Stat Service Locally
+## How to Run the Stats Service Locally
 ### 1. Install Dependencies
 
 Navigate to the root directory and install dependencies:
@@ -80,12 +80,18 @@ Navigate to the root directory and install dependencies:
 npm install
 ```
 
-### 2. Run the Stat Service
+### 2. Build the Stat Service
 
 ```bash
 npm run build
 ```
-The Stat Service will be accessible at `http://localhost:3000`.
+
+### 2. Run the Stat Service
+
+```bash
+npm run serve
+```
+The Stat Service will be accessible at `http://localhost`.
 
 ### Optional: Run the Jest Test Cases
 
