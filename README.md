@@ -111,6 +111,7 @@ npm test
 ## Build Docker Image and Push to ECR
 
 ### Prerequisites
+- Ensure yo have installed Docker.
 - Ensure you have an AWS account.
 - Ensure you have created an ECR repository.
 
@@ -196,7 +197,7 @@ You can also create/view the stack by searching for CloudFormation on the AWS Ma
 To create the stack on the AWS Management Console, upload the template file `ec2-docker.yaml`.  
 Once the stack has been created, the public IP address of the EC2 instance will be displayed in "Outputs".
 
-## Deploment on E2 via SSH
+## Deployment on E2 via SSH
 
 ### Prerequisites
 - Ensure you have created an EC2 Instance.
