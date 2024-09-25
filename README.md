@@ -17,6 +17,7 @@
 ## Assumptions
 - If a record exists for the specified userId, courseId, and sessionId, the service should update the existing stats; otherwise, it will create a new record.
 - If there are no stats found, 404 is to be returned.
+- The following must be over 0 when persisting stats: totalModulesStudied, averageScore, timeStudied.
 
 ## API Endpoints
 These endpoints allow you to use the stats service.
@@ -117,33 +118,45 @@ npm test
 
 ### 1. Build Docker Image
 Navigate to the directory containing your Dockerfile and run the following command to build your Docker image:
+
+- **`<your-image-name>`**: Name for the Docker image.
 ```bash
-docker build -t your-image-name .
+docker build -t <your-image-name> .
 ```
 
 ### 2. Authenticate Docker to Your ECR
 Run the following command to authenticate Docker to your ECR registry:
+- **`<your-account-id>`**: Your AWS account ID.
+- **`<your-region>`**: AWS Region for the ECR Repository 
 ```bash
-aws ecr get-login-password --region your-region | docker login --username AWS --password-stdin your-account-id.dkr.ecr.your-region.amazonaws.com
+aws ecr get-login-password --region <your-region> | docker login --username AWS --password-stdin <your-account-id>.dkr.ecr.<your-region>.amazonaws.com
 ```
 Replace your-region with the AWS region where your ECR repository is located and your-account-id with your AWS account ID.
 
 ### 3. Tag Your Docker Image for ECR
 Tag your Docker image to match your ECR repository name:
+- **`<your-image-name>`**: Name for the Docker image.
+- **`<your-account-id>`**: ID of your AWS Account.
+- **`<your-repository-name>`**: Name of your ECR Repository.
+- **`<your-region>`**: AWS Region for the ECR Repository 
 ```bash
-docker tag your-image-name:latest your-account-id.dkr.ecr.your-region.amazonaws.com/your-repository-name:latest
+docker tag <your-image-name>:latest <your-account-id>.dkr.ecr.<your-region>.amazonaws.com/<your-repository-name>:latest
 ```
 
 ### 4. Push Your Docker Image to ECR
 Push your tagged Docker image to your ECR repository:
+- **`<your-account-id>`**: ID of your AWS Account.
+- **`<your-repository-name>`**: Name of your ECR Repository.
+- **`<your-region>`**: AWS Region for the ECR Repository 
 ``` bash
-docker push your-account-id.dkr.ecr.your-region.amazonaws.com/your-repository-name:latest
+docker push <your-account-id>.dkr.ecr.<your-region>.amazonaws.com/<your-repository-name>:latest
 ```
 
 ## Deployment on E2 via CloudFormation
 
 ### Prerequisites
 - Ensure you have your docker image in ECR.
+- Ensure the AWS CLI is installed and configured.
 
 ### 1. Create CloudFormation Stack
 Navigate to the root directory containing the ec2-docker.yaml and run the following command to set up your EC2 instance and deploy the Docker image from ECR.
@@ -205,15 +218,20 @@ sudo usermod -aG docker ec2-user  # Add your user to the Docker group
 
 ### 2. Pull Your Docker Image on EC2
 Once your image is pushed to ECR, connect to your EC2 instance and run the authentication command again to authenticate with ECR. Then pull your image:
+- **`<your-account-id>`**: ID of your AWS Account.
+- **`<your-region>`**: AWS Region for the ECR Repository 
 ``` bash
-aws ecr get-login-password --region your-region | docker login --username AWS --password-stdin your-account-id.dkr.ecr.your-region.amazonaws.com
+aws ecr get-login-password --region <your-region> | docker login --username AWS --password-stdin <your-account-id>.dkr.ecr.<your-region>.amazonaws.com
 docker pull your-account-id.dkr.ecr.your-region.amazonaws.com/your-repository-name:latest
 ```
 
 ### 3. Run Your Docker Image on EC2
 Run the Docker image you pulled, mapping the appropriate ports. If your application runs on port 3000 inside the container, you can map it to port 80 on the EC2 instance:
+- **`<your-account-id>`**: ID of your AWS Account.
+- **`<your-repository-name>`**: Name of your ECR Repository.
+- **`<your-region>`**: AWS Region for the ECR Repository 
 ``` bash
-docker run -p 80:80 your-account-id.dkr.ecr.your-region.amazonaws.com/your-repository-name:latest
+docker run -p 80:80 <your-account-id>.dkr.ecr.<your-region>.amazonaws.com/<your-repository-name>:latest
 ```
 
 ### 4. Configure Security Groups
